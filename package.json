@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "bootstrap-sass": "^3.0.0",
+    "laravel-elixir": "^4.0.0",
+    "lscache": "^1.0.5",
+    "selectize": "^0.12.1"
+  }
+}
