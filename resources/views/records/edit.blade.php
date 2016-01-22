@@ -145,7 +145,7 @@
             type: 'GET',
             dataType: 'json',
             error: function() {
-                cb('API error');
+                cb(null, {error: 'API error'});
             },
             success: function(response) {
 
@@ -156,8 +156,9 @@
 
                 // Error
                 if (simple.error) {
-                    return cb(simple.error, null);
+                    return cb(null, {error: simple.error});
                 }
+                console.info(simple);
 
                 // Success
                 cb(null, simple);
@@ -173,7 +174,7 @@
 
     var subjects = [
         @foreach ($noubomn as $subject)
-            '{{ $subject }}',
+            '{!! $subject !!}',
             // TODO: Add type
         @endforeach
     ];
@@ -250,6 +251,7 @@
     async.map(subjects, authorizeHeading, function(err, results){
         $('#loading').hide();
         $('#main').show();
+        console.info('Done', err, results);
         initSelectize(results);
     });
 
@@ -267,7 +269,7 @@
 
         console.log('>INIT:', subjects);
 
-        options.options = subjects;
+        options.options = subjects.filter(function(k) { return k != undefined; });
 
         var $select = $('#select-repo').selectize(options);
         console.log($select);
